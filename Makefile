@@ -1,8 +1,8 @@
 # 定義編譯器為 gcc
 CC = gcc
 
-# 編譯選項，加入 -Wall 可以顯示所有的警告訊息
-CFLAGS = -Wall
+# 編譯選項，加入 -Wall 可以顯示所有的警告訊息，加入 -Iinclude 包含標頭檔目錄
+CFLAGS = -Wall -Iinclude
 
 # 目標執行檔名稱
 TARGET = main
@@ -14,10 +14,14 @@ SRC_DIR = src
 all: $(TARGET)
 
 # 編譯目標執行檔的規則
-# 依賴於 src 目錄下的 main.c
-$(TARGET): $(SRC_DIR)/main.c
-	$(CC) $(CFLAGS) -o $(TARGET) $(SRC_DIR)/main.c
+# 依賴於 src 目錄下的 main.c 和 pid.c
+$(TARGET): $(SRC_DIR)/main.c $(SRC_DIR)/pid.c
+	$(CC) $(CFLAGS) -o $(TARGET) $(SRC_DIR)/main.c $(SRC_DIR)/pid.c
 
 # 清除編譯產生的檔案的規則
 clean:
 	rm -f $(TARGET)
+
+# 執行測試
+test: all
+	./$(TARGET)
