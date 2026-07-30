@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
 #include "ring_buffer.h"
 #include "protocol.h"
 
@@ -14,7 +16,7 @@ void print_packet(const Packet *pkt) {
     printf("\n");
 }
 
-int main() {
+void app_main(void) {
     RingBuffer rb;
 
     // 1. 初始化
@@ -102,6 +104,4 @@ int main() {
             printf("解析中...\n");
         }
     }
-
-    return 0;
 }
