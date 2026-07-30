@@ -11,7 +11,7 @@ TARGET = main
 SRC_DIR = src
 
 # 來源檔案
-SRCS = $(SRC_DIR)/main.c $(SRC_DIR)/ring_buffer.c
+SRCS = $(SRC_DIR)/main.c $(SRC_DIR)/ring_buffer.c $(SRC_DIR)/protocol.c
 
 # 預設編譯目標
 all: $(TARGET)
