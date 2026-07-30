@@ -46,7 +46,9 @@
 
 - `include/protocol.h`: 定義了封包結構體與解析器狀態機的標頭檔。
 - `src/protocol.c`: 實作了基於狀態機的封包解析邏輯與校驗碼驗證。
-- `src/main.c`: 包含一個自訂 Serial 封包解析器的測試範例，並附有詳細的中文註解，用來展示如何模擬並解析收到的位元組流。
+- `include/ring_buffer.h`: 定義了環形緩衝區 (Circular Buffer) 結構體與核心 API 標頭檔。
+- `src/ring_buffer.c`: 實作了環形緩衝區的邏輯，包含指標折返與邊界檢查。
+- `src/main.c`: 包含自訂 Serial 封包解析器與環形緩衝區的測試範例，並附有詳細的中文註解，用來展示模組的使用方式。
 - `Makefile`: 用於自動化編譯與清理專案的腳本。
 
 ### 執行步驟

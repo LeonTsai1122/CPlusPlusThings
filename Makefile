@@ -16,8 +16,8 @@ all: $(TARGET)
 
 # 編譯目標執行檔的規則
 # 依賴於 src 目錄下的原始碼檔案
-$(TARGET): $(SRC_DIR)/main.c $(SRC_DIR)/protocol.c $(INC_DIR)/protocol.h
-	$(CC) $(CFLAGS) -o $(TARGET) $(SRC_DIR)/main.c $(SRC_DIR)/protocol.c
+$(TARGET): $(SRC_DIR)/main.c $(SRC_DIR)/protocol.c $(INC_DIR)/protocol.h $(SRC_DIR)/ring_buffer.c $(INC_DIR)/ring_buffer.h
+	$(CC) $(CFLAGS) -o $(TARGET) $(SRC_DIR)/main.c $(SRC_DIR)/protocol.c $(SRC_DIR)/ring_buffer.c
 
 # 清除編譯產生的檔案的規則
 clean:

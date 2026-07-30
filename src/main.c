@@ -1,5 +1,56 @@
 #include <stdio.h>
 #include "protocol.h"
+#include "ring_buffer.h"
+
+/**
+ * 測試環形緩衝區功能
+ */
+void test_ring_buffer() {
+    printf("Ring Buffer Test\n");
+    printf("=========================\n");
+
+    RingBuffer rb;
+    rb_init(&rb);
+
+    printf("1. 初始狀態:\n");
+    printf("   Is Empty? %s\n", rb_is_empty(&rb) ? "Yes" : "No");
+    printf("   Is Full? %s\n", rb_is_full(&rb) ? "Yes" : "No");
+
+    printf("\n2. 寫入資料 (Push):\n");
+    for (uint8_t i = 1; i <= 5; i++) {
+        if (rb_push(&rb, i * 10)) {
+            printf("   成功寫入: %d\n", i * 10);
+        } else {
+            printf("   寫入失敗: 緩衝區已滿\n");
+        }
+    }
+
+    printf("\n3. 讀取部分資料 (Pop):\n");
+    uint8_t data;
+    for (int i = 0; i < 3; i++) {
+        if (rb_pop(&rb, &data)) {
+            printf("   成功讀取: %d\n", data);
+        } else {
+            printf("   讀取失敗: 緩衝區為空\n");
+        }
+    }
+
+    printf("\n4. 再寫入資料 (觸發環形折返):\n");
+    for (uint8_t i = 6; i <= 8; i++) {
+        if (rb_push(&rb, i * 10)) {
+            printf("   成功寫入: %d\n", i * 10);
+        }
+    }
+
+    printf("\n5. 讀出剩餘所有資料:\n");
+    while (!rb_is_empty(&rb)) {
+        if (rb_pop(&rb, &data)) {
+            printf("   成功讀取: %d\n", data);
+        }
+    }
+
+    printf("\n");
+}
 
 /**
  * 程式進入點 (Main function)
@@ -9,6 +60,9 @@
  * @return 回傳 0 代表程式正常結束。
  */
 int main() {
+    // 執行環形緩衝區測試
+    test_ring_buffer();
+
     printf("Serial Packet Parser Test\n");
     printf("=========================\n");
 
