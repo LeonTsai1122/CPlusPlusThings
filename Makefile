@@ -6,10 +6,12 @@ CFLAGS = -Wall -Iinclude
 
 # 目標執行檔名稱
 TARGET = main
+TEST_TARGET = test_main
 
 # 原始碼目錄
 SRC_DIR = src
 INC_DIR = include
+TEST_DIR = test
 
 # 預設編譯目標
 all: $(TARGET)
@@ -19,6 +21,11 @@ all: $(TARGET)
 $(TARGET): $(SRC_DIR)/main.c $(SRC_DIR)/protocol.c $(INC_DIR)/protocol.h $(SRC_DIR)/ring_buffer.c $(INC_DIR)/ring_buffer.h
 	$(CC) $(CFLAGS) -o $(TARGET) $(SRC_DIR)/main.c $(SRC_DIR)/protocol.c $(SRC_DIR)/ring_buffer.c
 
+# 編譯並執行單元測試
+test: $(TEST_DIR)/test_main.c $(SRC_DIR)/protocol.c $(SRC_DIR)/ring_buffer.c
+	$(CC) $(CFLAGS) -o $(TEST_TARGET) $(TEST_DIR)/test_main.c $(SRC_DIR)/protocol.c $(SRC_DIR)/ring_buffer.c
+	./$(TEST_TARGET)
+
 # 清除編譯產生的檔案的規則
 clean:
-	rm -f $(TARGET)
+	rm -f $(TARGET) $(TEST_TARGET)

@@ -6,3 +6,4 @@ bazel-testlogs
 bazel-cplusplus_bazel
 .vscode
 main
+test_main
